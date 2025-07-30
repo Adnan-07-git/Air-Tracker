@@ -1,0 +1,32 @@
+{
+  "delhi": [
+    "Limit outdoor exposure during peak pollution hours (morning & evening).",
+    "Wear an N95 mask when outside.",
+    "Use indoor air purifiers.",
+    "Stay hydrated and avoid intense outdoor workouts."
+  ],
+  "mumbai": [
+    "Avoid outdoor activities near heavy traffic.",
+    "Use public transport to reduce personal vehicle use.",
+    "Monitor AQI before planning outdoor events.",
+    "Close windows during smoggy conditions."
+  ],
+  "new york": [
+    "Stay updated on local air quality alerts.",
+    "Reduce outdoor exercise on high AQI days.",
+    "Use HVAC filters indoors.",
+    "Avoid idling vehicles and support clean air initiatives."
+  ],
+  "bangalore": [
+    "Limit early morning outdoor walks during haze.",
+    "Use face masks during high AQI periods.",
+    "Keep indoor plants and air filters for improved air quality.",
+    "Prefer low-emission transport options."
+  ],
+  "hyderabad": [
+    "Avoid commuting during rush hours.",
+    "Wear a pollution mask when traveling outside.",
+    "Keep car windows closed in heavy traffic.",
+    "Use indoor air purifiers and stay indoors when AQI is poor."
+  ]
+}
