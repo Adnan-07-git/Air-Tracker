@@ -165,9 +165,7 @@
       try {
         const response = await fetch("data.json");
         const allData = await response.json();
-
         const cityMatch = Object.keys(allData).find(city => city.toLowerCase() === location);
-
         if (!cityMatch) {
           throw new Error("City not found");
         }
