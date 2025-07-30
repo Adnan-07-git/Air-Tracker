@@ -155,13 +155,11 @@
     async function showPrecautions() {
       const location = document.getElementById("location-input").value.trim().toLowerCase();
       const outputDiv = document.getElementById("precautions-output");
-
       if (!location) {
         outputDiv.innerHTML = "<strong>Please enter a city name.</strong>";
         outputDiv.style.display = "block";
         return;
       }
-
       try {
         const response = await fetch("data.json");
         const allData = await response.json();
