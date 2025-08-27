@@ -201,7 +201,6 @@
       const precautions = cityInfo.precautions;
       const aqi = cityInfo.aqi;
 
-      // AQI category + color
      let aqiLevel = "";
 let aqiColor = "";
 
@@ -232,27 +231,50 @@ if (aqi <= 50) {
     outputDiv.style.display = "block";
   }
 
-  // 💡 Random Tips
-  const tips = [
-    "Indoor plants like peace lilies and snake plants can help improve air quality.",
-    "Avoid outdoor exercise during peak traffic hours to reduce pollution exposure.",
-    "Switching to public transport can cut your personal carbon footprint by up to 30%.",
-    "Keeping windows closed during high pollution days helps reduce indoor exposure.",
-    "Staying hydrated helps your body flush out pollution-related toxins."
-  ];
+const tips = [
+  "Indoor plants like peace lilies, spider plants, and snake plants can help improve air quality by absorbing pollutants.",
+  "Switching to public transport can cut your personal carbon footprint by up to 30%.",
+  "Keeping windows closed during high pollution days helps reduce indoor exposure.",
+  "Staying hydrated helps your body flush out pollution-related toxins.",
+  "Air purifiers with HEPA filters can reduce indoor pollutants like dust, pollen, and smoke.",
+  "Carpooling with friends or colleagues reduces both traffic congestion and air pollution.",
+  "Burning candles and incense indoors can significantly worsen indoor air quality.",
+  "Using an exhaust fan while cooking helps remove harmful gases like nitrogen dioxide.",
+  "Electric vehicles produce zero tailpipe emissions, improving urban air quality.",
+  "Household dust can carry pollutants—regular vacuuming with a HEPA filter helps reduce it.",
+  "Children and the elderly are more vulnerable to poor air quality—extra precautions are important.",
+  "Reducing meat consumption can lower methane and greenhouse gas emissions linked to livestock farming.",
+  "Pollution levels are usually lower after heavy rainfall, as rain washes particulates from the air.",
+  "Smog tends to be worst on sunny, hot days when pollutants react with sunlight.",
+  "Switching to energy-efficient appliances reduces emissions from power plants.",
+  "Volatile Organic Compounds (VOCs) from paints and cleaners contribute to indoor air pollution.",
+  "Second-hand smoke releases hundreds of toxic chemicals into the air, even indoors.",
+  "Short trips pollute the most—walking or cycling for local errands makes a big difference.",
+  "Idling your car engine for more than 10 seconds wastes fuel and adds unnecessary pollution.",
+  "Air quality often improves significantly in early mornings and late nights due to lower traffic.",
+  "Trees not only provide oxygen but also trap dust and absorb harmful gases.",
+  "Avoid using diesel generators whenever possible—they release large amounts of particulate matter.",
+  "Switching to renewable energy sources like solar and wind improves both climate and air quality.",
+  "Poor ventilation indoors can trap pollutants—open windows on low-pollution days.",
+  "Air quality inside vehicles can sometimes be worse than outside due to trapped emissions.",
+  "Wood-burning stoves release fine particulate matter, which can be harmful to lungs.",
+  "High-efficiency furnace and AC filters help trap indoor air pollutants.",
+  "Walking on quieter side streets can reduce your pollution exposure by up to 60%.",
+  "Fine particles (PM2.5) are so small they can enter the bloodstream through your lungs."
+];
 
-  function showRandomTip() {
-    const tipBox = document.getElementById("tip-box");
-    if (tipBox) {
-      const randomTip = tips[Math.floor(Math.random() * tips.length)];
-      tipBox.textContent = randomTip;
-      console.log("✅ Tip displayed:", randomTip);
-    } else {
-      console.log("❌ Tip box not found");
-    }
+function showRandomTip() {
+  const tipBox = document.getElementById("tip-box");
+  if (tipBox) {
+    const randomTip = tips[Math.floor(Math.random() * tips.length)];
+    tipBox.textContent = randomTip;
   }
+}
 
-  window.addEventListener("load", showRandomTip);
+window.addEventListener("load", () => {
+  showRandomTip();
+  setInterval(showRandomTip, 10000);
+});
 </script>
 </body>
 </html>
