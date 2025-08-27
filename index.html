@@ -102,6 +102,16 @@
       border-left:5px solid #1E88E5;
       border-radius:8px;
     }
+    #tips-box {
+      display: block !important;
+      color: black !important;
+      font-size: 16px;
+    }
+    #tip-box {
+      display: block !important;
+      color: black !important;
+      font-weight: 500;
+}
   </style>
 </head>
 <body>
@@ -116,6 +126,8 @@
     <input type="text" id="location-input" placeholder="Enter city (e.g., Delhi)" />
     <button onclick="showPrecautions()">Search</button>
   </div>
+
+  <!-- Precautions results will show here -->
   <div id="precautions-output"></div>
 
   <!-- 💡 Tips Section -->
@@ -222,12 +234,15 @@
   ];
 
   function showRandomTip() {
-    const tipBox = document.getElementById("tip-box");
-    if (tipBox) {
-      const randomTip = tips[Math.floor(Math.random() * tips.length)];
-      tipBox.textContent = randomTip;
-    }
+  const tipBox = document.getElementById("tip-box");
+  if (tipBox) {
+    const randomTip = tips[Math.floor(Math.random() * tips.length)];
+    tipBox.textContent = randomTip;
+    console.log("✅ Tip displayed:", randomTip);
+  } else {
+    console.log("❌ Tip box not found");
   }
+}
 
   window.onload = showRandomTip;
 </script>
