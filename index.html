@@ -270,21 +270,21 @@ const tips = [
 let tipIndex = 0;
 const shuffledTips = tips.sort(() => 0.5 - Math.random());
 
-function showNextTip() {
+window.showNextTip = function () {
   const tipBox = document.getElementById("tip-box");
   if (tipBox) {
-    tipBox.style.opacity = 0; 
+    tipBox.style.opacity = 0;
     setTimeout(() => {
       tipBox.textContent = shuffledTips[tipIndex];
       tipBox.style.opacity = 1;
       tipIndex = (tipIndex + 1) % shuffledTips.length;
     }, 1000);
   }
-}
+};
 
-window.addEventListener("load", () => {
-  showNextTip();
-  setInterval(showNextTip, 10000); 
+window.addEventListener("DOMContentLoaded", () => {
+  window.showNextTip();
+  setInterval(window.showNextTip, 10000);
 });
 </script>
 </body>
