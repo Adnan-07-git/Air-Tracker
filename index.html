@@ -105,11 +105,13 @@
       color: black;
       font-size: 16px;
 }
-    #tip-box {
-      display: block !important;
-      color: black !important;
+   #tip-box {
+      display: block;
+      color: black;
       font-weight: 500;
+      transition: opacity 1s ease-in-out;
 }
+
   </style>
 </head>
 <body>
@@ -263,17 +265,24 @@ const tips = [
   "Fine particles (PM2.5) are so small they can enter the bloodstream through your lungs."
 ];
 
-function showRandomTip() {
+let tipIndex = 0;
+const shuffledTips = tips.sort(() => 0.5 - Math.random());
+
+function showNextTip() {
   const tipBox = document.getElementById("tip-box");
   if (tipBox) {
-    const randomTip = tips[Math.floor(Math.random() * tips.length)];
-    tipBox.textContent = randomTip;
+    tipBox.style.opacity = 0; 
+    setTimeout(() => {
+      tipBox.textContent = shuffledTips[tipIndex];
+      tipBox.style.opacity = 1;
+      tipIndex = (tipIndex + 1) % shuffledTips.length;
+    }, 1000);
   }
 }
 
 window.addEventListener("load", () => {
-  showRandomTip();
-  setInterval(showRandomTip, 10000);
+  showNextTip();
+  setInterval(showNextTip, 10000); 
 });
 </script>
 </body>
