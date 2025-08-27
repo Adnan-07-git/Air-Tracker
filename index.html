@@ -96,17 +96,15 @@
       display: none;
     }
     #tips-box {
-      margin-top:30px;
-      padding:20px;
-      background:#f1f9ff;
-      border-left:5px solid #1E88E5;
-      border-radius:8px;
-    }
-    #tips-box {
-      display: block !important;
-      color: black !important;
+      margin-top: 30px;
+      padding: 20px;
+      background: #f1f9ff;
+      border-left: 5px solid #1E88E5;
+      border-radius: 8px;
+      display: block;
+      color: black;
       font-size: 16px;
-    }
+}
     #tip-box {
       display: block !important;
       color: black !important;
@@ -192,23 +190,34 @@
       const allData = await response.json();
 
       const cityMatch = Object.keys(allData).find(city => city.toLowerCase() === location);
-
+      
       if (!cityMatch) {
-        throw new Error("City not found");
-      }
+        outputDiv.innerHTML = `<h3>No precautions found for "${location}".</h3>`;
+        outputDiv.style.display = "block";
+        return;
+    }
 
       const cityInfo = allData[cityMatch];
       const precautions = cityInfo.precautions;
       const aqi = cityInfo.aqi;
 
       // AQI category + color
-      let aqiLevel = "";
-      let aqiColor = "";
-      if (aqi <= 50) { aqiLevel = "Good"; aqiColor = "green"; }
-      else if (aqi <= 100) { aqiLevel = "Moderate"; aqiColor = "orange"; }
-      else if (aqi <= 200) { aqiLevel = "Unhealthy"; aqiColor = "red"; }
-      else { aqiLevel = "Hazardous"; aqiColor = "purple"; }
+     let aqiLevel = "";
+let aqiColor = "";
 
+if (aqi <= 50) {
+  aqiLevel = "Good"; aqiColor = "green";
+} else if (aqi <= 100) {
+  aqiLevel = "Moderate"; aqiColor = "yellow";
+} else if (aqi <= 150) {
+  aqiLevel = "Unhealthy for Sensitive Groups"; aqiColor = "orange";
+} else if (aqi <= 200) {
+  aqiLevel = "Unhealthy"; aqiColor = "red";
+} else if (aqi <= 300) {
+  aqiLevel = "Very Unhealthy"; aqiColor = "purple";
+} else {
+  aqiLevel = "Hazardous"; aqiColor = "maroon";
+}
       outputDiv.innerHTML = `
         <h3>Precautions for ${cityMatch}:</h3>
         <p><strong>AQI:</strong> <span style="color:${aqiColor}; font-weight:bold;">
@@ -217,8 +226,8 @@
         <ul>${precautions.map(p => `<li>${p}</li>`).join("")}</ul>
       `;
     } catch (error) {
-      outputDiv.innerHTML = `<h3>No precautions found for "${location}".</h3>`;
-    }
+        outputDiv.innerHTML = `<h3>⚠️ Error loading data. Please try again later.</h3>`;
+  }
 
     outputDiv.style.display = "block";
   }
@@ -243,7 +252,7 @@
     }
   }
 
-  window.onload = showRandomTip;
+  window.addEventListener("load", showRandomTip);
 </script>
 </body>
 </html>
