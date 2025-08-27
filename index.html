@@ -111,19 +111,19 @@
   </header>
 
   <section>
-    <h2>Search City Precautions</h2>
-    <div class="search-box">
-      <input type="text" id="location-input" placeholder="Enter city (e.g., Delhi)" />
-      <button onclick="showPrecautions()">Search</button>
-    </div>
-    <div id="precautions-output"></div>
+  <h2>Search City Precautions</h2>
+  <div class="search-box">
+    <input type="text" id="location-input" placeholder="Enter city (e.g., Delhi)" />
+    <button onclick="showPrecautions()">Search</button>
+  </div>
+  <div id="precautions-output"></div>
 
-    <!-- 💡 Tips Section (under search results) -->
-    <div id="tips-box">
-      <h3>💡 Did You Know?</h3>
-      <p id="tip-box">Loading tip...</p>
-    </div>
-  </section>
+  <!-- 💡 Tips Section -->
+  <div id="tips-box">
+    <h3>💡 Did You Know?</h3>
+    <p id="tip-box">Loading tip...</p>
+  </div>
+</section>
 
   <section>
     <h2>About the Project</h2>
@@ -211,22 +211,26 @@
       outputDiv.style.display = "block";
     }
 
-    // 💡 Random Tips
-    const tips = [
-      "Indoor plants like peace lilies and snake plants can help improve air quality.",
-      "Avoid outdoor exercise during peak traffic hours to reduce pollution exposure.",
-      "Switching to public transport can cut your personal carbon footprint by up to 30%.",
-      "Keeping windows closed during high pollution days helps reduce indoor exposure.",
-      "Staying hydrated helps your body flush out pollution-related toxins."
-    ];
+    <script>
+  // 💡 Random Tips
+  const tips = [
+    "Indoor plants like peace lilies and snake plants can help improve air quality.",
+    "Avoid outdoor exercise during peak traffic hours to reduce pollution exposure.",
+    "Switching to public transport can cut your personal carbon footprint by up to 30%.",
+    "Keeping windows closed during high pollution days helps reduce indoor exposure.",
+    "Staying hydrated helps your body flush out pollution-related toxins."
+  ];
 
-    function showRandomTip() {
-      const tipBox = document.getElementById("tip-box");
+  function showRandomTip() {
+    const tipBox = document.getElementById("tip-box");
+    if (tipBox) {
       const randomTip = tips[Math.floor(Math.random() * tips.length)];
       tipBox.textContent = randomTip;
     }
+  }
 
-    document.addEventListener("DOMContentLoaded", showRandomTip);
-  </script>
+  window.onload = showRandomTip;
+</script>
+
 </body>
 </html>
