@@ -152,32 +152,66 @@
   </footer>
 
   <script>
-    async function showPrecautions() {
-      const location = document.getElementById("location-input").value.trim().toLowerCase();
-      const outputDiv = document.getElementById("precautions-output");
-      if (!location) {
-        outputDiv.innerHTML = "<strong>Please enter a city name.</strong>";
-        outputDiv.style.display = "block";
-        return;
-      }
-      try {
-        const response = await fetch("data.json");
-        const allData = await response.json();
-        const cityMatch = Object.keys(allData).find(city => city.toLowerCase() === location);
-        if (!cityMatch) {
-          throw new Error("City not found");
-        }
+  async function showPrecautions() {
+    const location = document.getElementById("location-input").value.trim().toLowerCase();
+    const outputDiv = document.getElementById("precautions-output");
 
-        const precautions = allData[cityMatch];
-        outputDiv.innerHTML = `<h3>Precautions for ${cityMatch}:</h3><ul>` +
-          precautions.map(point => `<li>${point}</li>`).join('') +
-          `</ul>`;
-      } catch (error) {
-        outputDiv.innerHTML = `<h3>No precautions found for "${location}".</h3>`;
-      }
-
+    if (!location) {
+      outputDiv.innerHTML = "<strong>Please enter a city name.</strong>";
       outputDiv.style.display = "block";
+      return;
     }
-  </script>
+
+    try {
+      const response = await fetch("data.json");
+      const allData = await response.json();
+
+      const cityMatch = Object.keys(allData).find(city => city.toLowerCase() === location);
+
+      if (!cityMatch) {
+        throw new Error("City not found");
+      }
+
+      const cityInfo = allData[cityMatch];
+      const precautions = cityInfo.precautions;
+      const aqi = cityInfo.aqi;
+
+      let aqiLevel = "";
+      let aqiColor = "";
+      if (aqi <= 50) { aqiLevel = "Good"; aqiColor = "green"; }
+      else if (aqi <= 100) { aqiLevel = "Moderate"; aqiColor = "orange"; }
+      else if (aqi <= 200) { aqiLevel = "Unhealthy"; aqiColor = "red"; }
+      else { aqiLevel = "Hazardous"; aqiColor = "purple"; }
+
+      outputDiv.innerHTML = `
+        <h3>Precautions for ${cityMatch}:</h3>
+        <p><strong>AQI:</strong> <span style="color:${aqiColor}; font-weight:bold;">
+          ${aqi} (${aqiLevel})
+        </span></p>
+        <ul>${precautions.map(p => `<li>${p}</li>`).join("")}</ul>
+      `;
+    } catch (error) {
+      outputDiv.innerHTML = `<h3>No precautions found for "${location}".</h3>`;
+    }
+
+    outputDiv.style.display = "block";
+  }
+
+  const tips = [
+    "Indoor plants like peace lilies and snake plants can help improve air quality.",
+    "Avoid outdoor exercise during peak traffic hours to reduce pollution exposure.",
+    "Switching to public transport can cut your personal carbon footprint by up to 30%.",
+    "Keeping windows closed during high pollution days helps reduce indoor exposure.",
+    "Staying hydrated helps your body flush out pollution-related toxins."
+  ];
+
+  function showRandomTip() {
+    const tipBox = document.getElementById("tip-box");
+    const randomTip = tips[Math.floor(Math.random() * tips.length)];
+    tipBox.textContent = randomTip;
+  }
+
+  document.addEventListener("DOMContentLoaded", showRandomTip);
+</script>
 </body>
 </html>
