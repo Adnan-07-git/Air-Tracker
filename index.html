@@ -16,17 +16,16 @@
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 100%);
   min-height: 100vh;
-  color: #2d3748;
+  color: #1e293b;
   line-height: 1.6;
 }
 
 /* ===== HEADER ===== */
 header {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(20px);
-  color: #1a365d;
+  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+  color: white;
   padding: 4rem 2rem;
   text-align: center;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
@@ -38,36 +37,32 @@ header h1 {
   font-size: 3.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 header p {
   font-size: 1.25rem;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 /* ===== SECTIONS ===== */
 section {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(15px);
   padding: 2.5rem;
   margin: 2rem auto;
   max-width: 1100px;
-  border-radius: 24px;
-  box-shadow: 
-    0 20px 25px -5px rgba(0, 0, 0, 0.1),
-    0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(255,255,255,0.2);
-  color: white;
-  position: relative;
+  border-radius: 20px;
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.05),
+    0 10px 10px -5px rgba(0, 0, 0, 0.03);
+  border: 1px solid #e2e8f0;
+  color: #1e293b;
 }
 
 section h2 {
   font-family: 'Poppins', sans-serif;
   font-size: 2rem;
-  color: #e0e7ff;
+  color: #1e40af;
   margin-bottom: 1.5rem;
   position: relative;
   padding-left: 1rem;
@@ -89,27 +84,26 @@ section h2::before {
   margin: 2rem auto;
   text-align: center;
   padding: 2.5rem;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(15px);
-  border: none;
-  border-radius: 20px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
   max-width: 700px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
 }
 
 .search-box input[type="text"] {
   padding: 1rem 1.5rem;
   font-size: 1.1rem;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid #cbd5e1;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
+  background: #fff;
+  color: #1e293b;
   outline: none;
   width: 60%;
 }
 
 .search-box input[type="text"]::placeholder {
-  color: #e2e8f0;
+  color: #94a3b8;
 }
 
 .search-box button {
@@ -135,15 +129,15 @@ section h2::before {
 #precautions-output {
   margin-top: 2rem;
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255,255,255,0.2);
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
   border-radius: 16px;
   display: none;
-  color: white;
+  color: #1e293b;
 }
 
 #precautions-output h3 {
-  color: #e0e7ff;
+  color: #1e40af;
   margin-bottom: 1rem;
   font-family: 'Poppins', sans-serif;
 }
@@ -157,7 +151,7 @@ section h2::before {
   padding: 0.75rem 0;
   padding-left: 1.5rem;
   position: relative;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid #e2e8f0;
 }
 
 #precautions-output li:last-child {
@@ -166,7 +160,7 @@ section h2::before {
 
 #precautions-output li::before {
   content: '•';
-  color: #93c5fd;
+  color: #3b82f6;
   font-size: 1.2rem;
   position: absolute;
   left: 0;
@@ -176,10 +170,10 @@ section h2::before {
 #tips-box {
   margin-top: 2rem;
   padding: 2rem;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.2);
+  background: #fff7ed;
+  border: 1px solid #fdba74;
   border-radius: 16px;
-  color: #fef9c3;
+  color: #92400e;
 }
 
 #tips-box h3 {
@@ -187,14 +181,13 @@ section h2::before {
   font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: #facc15;
+  color: #c2410c;
 }
 
 #tip-box {
   display: block;
   font-weight: 500;
   font-size: 1rem;
-  transition: opacity 1s ease-in-out;
   min-height: 60px;
   line-height: 1.6;
 }
@@ -203,12 +196,11 @@ section h2::before {
 footer {
   text-align: center;
   padding: 3rem 2rem;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(15px);
-  color: #cbd5e1;
+  background: #f1f5f9;
+  color: #475569;
   font-size: 0.9rem;
   margin-top: 3rem;
-  border-top: 1px solid rgba(255,255,255,0.2);
+  border-top: 1px solid #e2e8f0;
 }
 
 /* ===== RESPONSIVE ===== */
@@ -217,6 +209,7 @@ footer {
   .search-box input[type="text"] { width: 100%; margin-bottom: 1rem; }
   .search-box button { width: 100%; margin-left: 0; }
 }
+
   </style>
 </head>
 <body>
