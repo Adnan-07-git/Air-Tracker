@@ -4,402 +4,392 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>CleanAir Tracker</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+    /* ===== Reset ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    /* ========= Decorative background images (must match HTML classes) ========= */
+    .decor-images {
+      position: fixed;
+      inset: 0;
+      pointer-events: none; /* don't block clicks */
+      z-index: -1;          /* always behind content */
+      overflow: hidden;
+    }
 
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 100%);
-  min-height: 100vh;
-  color: #1e293b;
-  line-height: 1.6;
-}
+    .decor-img {
+      position: absolute;
+      width: 140px;
+      opacity: 0.12;
+      user-select: none;
+      filter: blur(0.2px);
+      animation: floatRotate 28s linear infinite, fadePulse 12s ease-in-out infinite;
+      will-change: transform, opacity;
+      pointer-events: none;
+    }
 
-/* ===== HEADER ===== */
-header {
-  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
-  color: white;
-  padding: 4rem 2rem;
-  text-align: center;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid rgba(255,255,255,0.2);
-}
+    /* positions (adjust sizes/positions if you want) */
+    .decor-cloud  { top: 6%; left: 4%;  width: 180px;  }
+    .decor-sun    { top: 8%; right: 6%;  width: 140px;  animation-delay: 3s; }
+    .decor-leaves { bottom: 12%; left: 6%; width: 130px;  animation-delay: 6s; }
+    .decor-earth  { bottom: 6%; right: 6%; width: 200px;  animation-delay: 9s; opacity: 0.08; }
 
-header h1 {
-  font-family: 'Poppins', sans-serif;
-  font-size: 3.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
+    @keyframes floatRotate {
+      0%   { transform: rotate(0deg) translateY(0); }
+      50%  { transform: rotate(180deg) translateY(-12px); }
+      100% { transform: rotate(360deg) translateY(0); }
+    }
+    @keyframes fadePulse {
+      0%,100% { opacity: 0.08; }
+      50%     { opacity: 0.22; }
+    }
 
-header p {
-  font-size: 1.25rem;
-  opacity: 0.9;
-}
+    /* ========= Page styling (high-contrast / modern) ========= */
+    body {
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 100%);
+      min-height: 100vh;
+      color: #1e293b;
+      line-height: 1.6;
+    }
 
-/* ===== SECTIONS ===== */
-section {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(15px);
-  padding: 2.5rem;
-  margin: 2rem auto;
-  max-width: 1100px;
-  border-radius: 20px;
-  box-shadow:
-    0 20px 25px -5px rgba(0, 0, 0, 0.05),
-    0 10px 10px -5px rgba(0, 0, 0, 0.03);
-  border: 1px solid #e2e8f0;
-  color: #1e293b;
-}
+    header {
+      background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+    header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    header p { font-size: 1.05rem; opacity: 0.92; }
 
-section h2 {
-  font-family: 'Poppins', sans-serif;
-  font-size: 2rem;
-  color: #1e40af;
-  margin-bottom: 1.5rem;
-  position: relative;
-  padding-left: 1rem;
-}
+    .container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
 
-section h2::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: linear-gradient(135deg, #60a5fa 0%, #1d4ed8 100%);
-  border-radius: 2px;
-}
+    section {
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(8px);
+      padding: 2rem;
+      margin: 1.75rem auto;
+      border-radius: 16px;
+      box-shadow:
+        0 18px 22px -10px rgba(0,0,0,0.06),
+        0 8px 10px -8px rgba(0,0,0,0.04);
+      border: 1px solid #e6eefc;
+      color: #1e293b;
+    }
 
-/* ===== SEARCH BOX ===== */
-.search-box {
-  margin: 2rem auto;
-  text-align: center;
-  padding: 2.5rem;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 16px;
-  max-width: 700px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-}
+    section h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.6rem;
+      color: #1e40af;
+      margin-bottom: 1rem;
+      padding-left: 0.6rem;
+      position: relative;
+    }
+    section h2::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.3rem;
+      bottom: 0.3rem;
+      width: 4px;
+      background: linear-gradient(135deg, #60a5fa, #1d4ed8);
+      border-radius: 2px;
+    }
 
-.search-box input[type="text"] {
-  padding: 1rem 1.5rem;
-  font-size: 1.1rem;
-  border: 2px solid #cbd5e1;
-  border-radius: 12px;
-  background: #fff;
-  color: #1e293b;
-  outline: none;
-  width: 60%;
-}
+    /* Search box */
+    .search-box {
+      margin: 1.25rem auto;
+      text-align: center;
+      padding: 1.5rem;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      max-width: 720px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+    }
+    .input-group { display:flex; gap:1rem; max-width:640px; margin:0 auto; align-items:center; }
+    .search-box input[type="text"] {
+      flex:1;
+      padding: 0.9rem 1rem;
+      border-radius: 10px;
+      border: 1px solid #cbd5e1;
+      font-size: 1rem;
+      background: #fff;
+      color: #0f172a;
+      outline: none;
+    }
+    .search-box input[type="text"]::placeholder { color: #94a3b8; }
+    .search-box button {
+      padding: 0.9rem 1.25rem;
+      border-radius: 10px;
+      border: none;
+      background: linear-gradient(135deg,#3b82f6,#1d4ed8);
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .18s ease;
+    }
+    .search-box button:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(59,130,246,0.18); }
 
-.search-box input[type="text"]::placeholder {
-  color: #94a3b8;
-}
+    /* Precautions output */
+    #precautions-output {
+      margin-top: 1.25rem;
+      padding: 1.4rem;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      display: none;
+      color: #0f172a;
+    }
+    #precautions-output h3 { color: #0f172a; margin-bottom: 0.5rem; font-family: 'Poppins', sans-serif; }
+    #precautions-output ul { list-style: none; padding-left: 0; }
+    #precautions-output li {
+      padding: 0.6rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      border-bottom: 1px solid #e6eefc;
+    }
+    #precautions-output li:last-child { border-bottom: none; }
+    #precautions-output li::before {
+      content: '•';
+      color: #3b82f6;
+      font-size: 1.1rem;
+      position: absolute;
+      left: 0;
+      top: 0.1rem;
+    }
 
-.search-box button {
-  padding: 1rem 2rem;
-  margin-left: 1rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
+    /* Tips box */
+    #tips-box {
+      margin-top: 1.25rem;
+      padding: 1.4rem;
+      background: #fff7ed;
+      border: 1px solid #fcd34d;
+      border-radius: 12px;
+      color: #92400e;
+    }
+    #tips-box h3 { font-family:'Poppins',sans-serif; font-size:1.1rem; color:#b45309; margin-bottom:0.6rem; }
+    #tip-box { transition: opacity .5s ease; min-height: 48px; font-weight:500; }
 
-.search-box button:hover {
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
-}
+    footer {
+      text-align:center;
+      padding: 2rem;
+      background: #f1f5f9;
+      color: #475569;
+      border-top: 1px solid #e6eefc;
+      margin-top: 2rem;
+    }
 
-/* ===== PRECAUTIONS BOX ===== */
-#precautions-output {
-  margin-top: 2rem;
-  padding: 2rem;
-  background: #f1f5f9;
-  border: 1px solid #cbd5e1;
-  border-radius: 16px;
-  display: none;
-  color: #1e293b;
-}
-
-#precautions-output h3 {
-  color: #1e40af;
-  margin-bottom: 1rem;
-  font-family: 'Poppins', sans-serif;
-}
-
-#precautions-output ul {
-  list-style: none;
-  padding: 0;
-}
-
-#precautions-output li {
-  padding: 0.75rem 0;
-  padding-left: 1.5rem;
-  position: relative;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-#precautions-output li:last-child {
-  border-bottom: none;
-}
-
-#precautions-output li::before {
-  content: '•';
-  color: #3b82f6;
-  font-size: 1.2rem;
-  position: absolute;
-  left: 0;
-}
-
-/* ===== TIPS ===== */
-#tips-box {
-  margin-top: 2rem;
-  padding: 2rem;
-  background: #fff7ed;
-  border: 1px solid #fdba74;
-  border-radius: 16px;
-  color: #92400e;
-}
-
-#tips-box h3 {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: #c2410c;
-}
-
-#tip-box {
-  display: block;
-  font-weight: 500;
-  font-size: 1rem;
-  min-height: 60px;
-  line-height: 1.6;
-}
-
-/* ===== FOOTER ===== */
-footer {
-  text-align: center;
-  padding: 3rem 2rem;
-  background: #f1f5f9;
-  color: #475569;
-  font-size: 0.9rem;
-  margin-top: 3rem;
-  border-top: 1px solid #e2e8f0;
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-  header h1 { font-size: 2.5rem; }
-  .search-box input[type="text"] { width: 100%; margin-bottom: 1rem; }
-  .search-box button { width: 100%; margin-left: 0; }
-}
-
+    /* Responsive */
+    @media (max-width: 768px) {
+      header h1 { font-size: 2rem; }
+      .input-group { flex-direction: column; gap:0.75rem; }
+      .search-box input[type="text"] { width: 100%; }
+      .search-box button { width: 100%; margin-left: 0; }
+    }
   </style>
 </head>
 <body>
+
+  <!-- Decorative images: placed before content so they sit behind everything -->
+<div class="decor-images">
+  <img src="images/Skyline.jpg" class="decor-img decor-cloud" alt="Skyline background">
+  <img src="images/Airflow.jpg" class="decor-img decor-sun" alt="Air flow visual">
+  <img src="images/Leaves.jpg" class="decor-img decor-leaves" alt="Leaves illustration">
+  <img src="images/Earth.jpg" class="decor-img decor-earth" alt="Earth illustration">
+</div>
+
   <header>
     <h1>CleanAir Tracker</h1>
     <p>Stay Informed. Breathe Better. Live Smarter.</p>
   </header>
 
-  <section>
-  <h2>Search City Precautions</h2>
-  <div class="search-box">
-    <input type="text" id="location-input" placeholder="Enter city (e.g., Delhi)" />
-    <button onclick="showPrecautions()">Search</button>
+  <div class="container">
+    <section>
+      <h2>Search City Precautions</h2>
+
+      <div class="search-box">
+        <div class="input-group">
+          <input type="text" id="location-input" placeholder="Enter city (e.g., Delhi, Mumbai, Bangalore)" />
+          <button onclick="showPrecautions()">Search</button>
+        </div>
+      </div>
+
+      <div id="precautions-output"></div>
+
+      <div id="tips-box">
+        <h3>💡 Did You Know?</h3>
+        <p id="tip-box">Loading tip...</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>About the Project</h2>
+      <p>CleanAir Tracker is a solution to monitor air pollution trends and provide users with localized health precautions based on air quality conditions in urban environments. The goal is to raise awareness, encourage behavioral change, and reduce health risks associated with poor air quality.</p>
+    </section>
+
+    <section>
+      <h2>Our Mission</h2>
+      <p>To empower individuals and communities with accessible, location-based air quality insights and safety recommendations—so everyone can make informed, healthy choices every day.</p>
+    </section>
+
+    <section>
+      <h2>Key Features</h2>
+      <div class="features">
+        <div class="feature-box">📊 Location-specific precaution lookup</div>
+        <div class="feature-box">🧠 Clean, intuitive interface</div>
+        <div class="feature-box">📱 Mobile-friendly and responsive design</div>
+        <div class="feature-box">🔒 Privacy-conscious</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Development Stage</h2>
+      <p>Currently at <strong>Technology Readiness Level 4 (TRL 4)</strong> — functional software prototype validated in a controlled environment. Ready to evolve with real-time data integration and hardware expansion.</p>
+    </section>
+
+    <section>
+      <h2>Support & Collaboration</h2>
+      <p>This project is independently developed with mentorship from academic advisors and is supported by the college’s Innovation/Entrepreneurship Cell. Open to collaborations with researchers, developers, and environmental organizations.</p>
+    </section>
   </div>
-
-  <!-- Precautions results will show here -->
-  <div id="precautions-output"></div>
-
-  <!-- 💡 Tips Section -->
-  <div id="tips-box">
-    <h3>💡 Did You Know?</h3>
-    <p id="tip-box">Loading tip...</p>
-  </div>
-</section>
-
-  <section>
-    <h2>About the Project</h2>
-    <p>CleanAir Tracker is a solution to monitor air pollution trends and provide users with localized health precautions based on air quality conditions in urban environments. The goal is to raise awareness, encourage behavioral change, and reduce health risks associated with poor air quality.</p>
-  </section>
-
-  <section>
-    <h2>Our Mission</h2>
-    <p>To empower individuals and communities with accessible, location-based air quality insights and safety recommendations—so everyone can make informed, healthy choices every day.</p>
-  </section>
-
-  <section>
-    <h2>Key Features</h2>
-    <div class="features">
-      <div class="feature-box">📊 Location-specific precaution lookup</div>
-      <div class="feature-box">🧠 Clean, intuitive interface</div>
-      <div class="feature-box">📱 Mobile-friendly and responsive design</div>
-      <div class="feature-box">🔒 100% software-based, privacy-conscious</div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Why This Matters</h2>
-    <p>Air pollution is a silent crisis affecting millions. This project delivers reliable, actionable guidance to the public—especially in urban areas—through a lightweight, fast, and privacy-conscious platform. It's designed for scalability, awareness, and accessibility.</p>
-  </section>
-
-  <section>
-  <h2>Development Stage</h2>
-  <p>Currently at <strong>Technology Readiness Level 4 (TRL 4)</strong> — functional software prototype validated in a controlled environment. Ready to evolve with real-time data integration and hardware expansion.</p>
-  </section>
-
-  <section>
-    <h2>Support & Collaboration</h2>
-    <p>This project is independently developed with mentorship from academic advisors and is supported by the college’s Innovation/Entrepreneurship Cell. Open to collaborations with researchers, developers, and environmental organizations.</p>
-  </section>
 
   <footer>
     <p>&copy; 2025 CleanAir Tracker. All rights reserved.</p>
   </footer>
 
- <script>
-  async function showPrecautions() {
-    const location = document.getElementById("location-input").value.trim().toLowerCase();
-    const outputDiv = document.getElementById("precautions-output");
-  
-    if (!location) {
-      outputDiv.innerHTML = "<strong>Please enter a city name.</strong>";
+  <script>
+    async function showPrecautions() {
+      const location = document.getElementById("location-input").value.trim().toLowerCase();
+      const outputDiv = document.getElementById("precautions-output");
+
+      if (!location) {
+        outputDiv.innerHTML = "<strong>Please enter a city name.</strong>";
+        outputDiv.style.display = "block";
+        return;
+      }
+
+      try {
+        const response = await fetch("data.json");
+        const allData = await response.json();
+
+        const cityMatch = Object.keys(allData).find(city => city.toLowerCase() === location);
+
+        if (!cityMatch) {
+          outputDiv.innerHTML = `<h3>No precautions found for "${location}".</h3>`;
+          outputDiv.style.display = "block";
+          return;
+        }
+
+        const cityInfo = allData[cityMatch];
+        const precautions = cityInfo.precautions;
+        const aqi = cityInfo.aqi;
+
+        let aqiLevel = "";
+        let aqiColor = "";
+
+        if (aqi <= 50) {
+          aqiLevel = "Good"; aqiColor = "green";
+        } else if (aqi <= 100) {
+          aqiLevel = "Moderate"; aqiColor = "#f59e0b"; // better contrast than plain 'yellow'
+        } else if (aqi <= 150) {
+          aqiLevel = "Unhealthy for Sensitive Groups"; aqiColor = "orange";
+        } else if (aqi <= 200) {
+          aqiLevel = "Unhealthy"; aqiColor = "red";
+        } else if (aqi <= 300) {
+          aqiLevel = "Very Unhealthy"; aqiColor = "purple";
+        } else {
+          aqiLevel = "Hazardous"; aqiColor = "maroon";
+        }
+
+        outputDiv.innerHTML = `
+          <h3>Precautions for ${cityMatch}:</h3>
+          <p><strong>AQI:</strong> <span style="color:${aqiColor}; font-weight:bold;">
+            ${aqi} (${aqiLevel})
+          </span></p>
+          <ul>${precautions.map(p => `<li>${p}</li>`).join("")}</ul>
+        `;
+      } catch (error) {
+        console.error(error);
+        outputDiv.innerHTML = `<h3>⚠️ Error loading data. Please try again later.</h3>`;
+      }
+
       outputDiv.style.display = "block";
-      return;
-  }
-
-  try {
-    const response = await fetch("data.json");
-    const allData = await response.json();
-
-    const cityMatch = Object.keys(allData).find(city => city.toLowerCase() === location);
-
-    if (!cityMatch) {
-      outputDiv.innerHTML = `<h3>No precautions found for "${location}".</h3>`;
-      outputDiv.style.display = "block";
-      return;
     }
 
-    const cityInfo = allData[cityMatch];
-    const precautions = cityInfo.precautions;
-    const aqi = cityInfo.aqi;
+    // 💡 Tips rotation (no immediate repeats)
+    const tips = [
+      "Indoor plants like peace lilies, spider plants, and snake plants can help improve air quality by absorbing pollutants.",
+      "Switching to public transport can cut your personal carbon footprint by up to 30%.",
+      "Keeping windows closed during high pollution days helps reduce indoor exposure.",
+      "Staying hydrated helps your body flush out pollution-related toxins.",
+      "Air purifiers with HEPA filters can reduce indoor pollutants like dust, pollen, and smoke.",
+      "Carpooling with friends or colleagues reduces both traffic congestion and air pollution.",
+      "Burning candles and incense indoors can significantly worsen indoor air quality.",
+      "Using an exhaust fan while cooking helps remove harmful gases like nitrogen dioxide.",
+      "Electric vehicles produce zero tailpipe emissions, improving urban air quality.",
+      "Household dust can carry pollutants—regular vacuuming with a HEPA filter helps reduce it.",
+      "Children and the elderly are more vulnerable to poor air quality—extra precautions are important.",
+      "Reducing meat consumption can lower methane and greenhouse gas emissions linked to livestock farming.",
+      "Pollution levels are usually lower after heavy rainfall, as rain washes particulates from the air.",
+      "Smog tends to be worst on sunny, hot days when pollutants react with sunlight.",
+      "Switching to energy-efficient appliances reduces emissions from power plants.",
+      "Volatile Organic Compounds (VOCs) from paints and cleaners contribute to indoor air pollution.",
+      "Second-hand smoke releases hundreds of toxic chemicals into the air, even indoors.",
+      "Short trips pollute the most—walking or cycling for local errands makes a big difference.",
+      "Idling your car engine for more than 10 seconds wastes fuel and adds unnecessary pollution.",
+      "Air quality often improves significantly in early mornings and late nights due to lower traffic.",
+      "Trees not only provide oxygen but also trap dust and absorb harmful gases.",
+      "Avoid using diesel generators whenever possible—they release large amounts of particulate matter.",
+      "Switching to renewable energy sources like solar and wind improves both climate and air quality.",
+      "Poor ventilation indoors can trap pollutants—open windows on low-pollution days.",
+      "Air quality inside vehicles can sometimes be worse than outside due to trapped emissions.",
+      "Wood-burning stoves release fine particulate matter, which can be harmful to lungs.",
+      "High-efficiency furnace and AC filters help trap indoor air pollutants.",
+      "Walking on quieter side streets can reduce your pollution exposure by up to 60%.",
+      "Fine particles (PM2.5) are so small they can enter the bloodstream through your lungs."
+    ];
 
-    let aqiLevel = "";
-    let aqiColor = "";
+    let usedTips = [];
+    let currentTip = "";
 
-    if (aqi <= 50) {
-      aqiLevel = "Good"; aqiColor = "green";
-    } else if (aqi <= 100) {
-      aqiLevel = "Moderate"; aqiColor = "yellow";
-    } else if (aqi <= 150) {
-      aqiLevel = "Unhealthy for Sensitive Groups"; aqiColor = "orange";
-    } else if (aqi <= 200) {
-      aqiLevel = "Unhealthy"; aqiColor = "red";
-    } else if (aqi <= 300) {
-      aqiLevel = "Very Unhealthy"; aqiColor = "purple";
-    } else {
-      aqiLevel = "Hazardous"; aqiColor = "maroon";
+    function getRandomTip() {
+      if (usedTips.length === tips.length) usedTips = [];
+      let newTip;
+      do {
+        newTip = tips[Math.floor(Math.random() * tips.length)];
+      } while (newTip === currentTip || usedTips.includes(newTip));
+      usedTips.push(newTip);
+      currentTip = newTip;
+      return newTip;
     }
 
-    outputDiv.innerHTML = `
-      <h3>Precautions for ${cityMatch}:</h3>
-      <p><strong>AQI:</strong> <span style="color:${aqiColor}; font-weight:bold;">
-        ${aqi} (${aqiLevel})
-      </span></p>
-      <ul>${precautions.map(p => `<li>${p}</li>`).join("")}</ul>
-    `;
-  } catch (error) {
-    outputDiv.innerHTML = `<h3>⚠️ Error loading data. Please try again later.</h3>`;
-  }
+    function showNextTip() {
+      const tipBox = document.getElementById("tip-box");
+      if (!tipBox) return;
+      tipBox.style.opacity = 0;
+      setTimeout(() => {
+        tipBox.textContent = getRandomTip();
+        tipBox.style.opacity = 1;
+      }, 300);
+    }
 
-  outputDiv.style.display = "block";
-}
+    window.addEventListener("DOMContentLoaded", () => {
+      showNextTip();
+      setInterval(showNextTip, 10000);
+    });
+  </script>
 
-// 💡 Tips Section
-const tips = [
-  "Indoor plants like peace lilies, spider plants, and snake plants can help improve air quality by absorbing pollutants.",
-  "Switching to public transport can cut your personal carbon footprint by up to 30%.",
-  "Keeping windows closed during high pollution days helps reduce indoor exposure.",
-  "Staying hydrated helps your body flush out pollution-related toxins.",
-  "Air purifiers with HEPA filters can reduce indoor pollutants like dust, pollen, and smoke.",
-  "Carpooling with friends or colleagues reduces both traffic congestion and air pollution.",
-  "Burning candles and incense indoors can significantly worsen indoor air quality.",
-  "Using an exhaust fan while cooking helps remove harmful gases like nitrogen dioxide.",
-  "Electric vehicles produce zero tailpipe emissions, improving urban air quality.",
-  "Household dust can carry pollutants—regular vacuuming with a HEPA filter helps reduce it.",
-  "Children and the elderly are more vulnerable to poor air quality—extra precautions are important.",
-  "Reducing meat consumption can lower methane and greenhouse gas emissions linked to livestock farming.",
-  "Pollution levels are usually lower after heavy rainfall, as rain washes particulates from the air.",
-  "Smog tends to be worst on sunny, hot days when pollutants react with sunlight.",
-  "Switching to energy-efficient appliances reduces emissions from power plants.",
-  "Volatile Organic Compounds (VOCs) from paints and cleaners contribute to indoor air pollution.",
-  "Second-hand smoke releases hundreds of toxic chemicals into the air, even indoors.",
-  "Short trips pollute the most—walking or cycling for local errands makes a big difference.",
-  "Idling your car engine for more than 10 seconds wastes fuel and adds unnecessary pollution.",
-  "Air quality often improves significantly in early mornings and late nights due to lower traffic.",
-  "Trees not only provide oxygen but also trap dust and absorb harmful gases.",
-  "Avoid using diesel generators whenever possible—they release large amounts of particulate matter.",
-  "Switching to renewable energy sources like solar and wind improves both climate and air quality.",
-  "Poor ventilation indoors can trap pollutants—open windows on low-pollution days.",
-  "Air quality inside vehicles can sometimes be worse than outside due to trapped emissions.",
-  "Wood-burning stoves release fine particulate matter, which can be harmful to lungs.",
-  "High-efficiency furnace and AC filters help trap indoor air pollutants.",
-  "Walking on quieter side streets can reduce your pollution exposure by up to 60%.",
-  "Fine particles (PM2.5) are so small they can enter the bloodstream through your lungs."
-];
-
-let usedTips = [];
-let currentTip = "";
-
-// Pick a new tip without immediate repeats
-function getRandomTip() {
-  if (usedTips.length === tips.length) usedTips = [];
-  let newTip;
-  do {
-    newTip = tips[Math.floor(Math.random() * tips.length)];
-  } while (newTip === currentTip || usedTips.includes(newTip));
-  usedTips.push(newTip);
-  currentTip = newTip;
-  return newTip;
-}
-
-// Show next tip with fade animation
-function showNextTip() {
-  const tipBox = document.getElementById("tip-box");
-  if (!tipBox) return;
-  
-  // Fade out
-  tipBox.style.opacity = 0;
-
-  // Update text after fade out
-  setTimeout(() => {
-    tipBox.textContent = getRandomTip();
-    tipBox.style.opacity = 1; // Fade back in
-  }, 500); // half the transition time for smooth overlap
-}
-
-// Initialise tip rotation on page load
-window.addEventListener("DOMContentLoaded", () => {
-  showNextTip();
-  setInterval(showNextTip, 10000); // Refresh every 10 seconds
-});
-</script>
 </body>
 </html>
