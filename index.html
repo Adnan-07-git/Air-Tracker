@@ -9,55 +9,44 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ===== Reset ===== */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  .decor-images {
+    /* ===== Decorative images ===== */
+.decor-images {
   position: relative;
   width: 100%;
-  height: 0; /* or 400px if you want vertical space */
+  height: 400px; /* adjust height as needed */
+  overflow: hidden;
 }
 
 .decor-img {
   position: absolute;
-  top: 0;  /* set default starting positions */
-  left: 0; /* adjust individually with inline style or additional classes */
+  width: 140px;
+  height: 140px;
+  opacity: 1;
+  z-index: 0;
+  pointer-events: none;
+  filter: brightness(0.7) drop-shadow(0 4px 10px rgba(0,0,0,0.2));
+  transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-  /* ===== Reset ===== */
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+/* Individual image positions */
+.decor-Skyline   { top: 20px; left: 50px; }
+.decor-Airflow { top: 100px; left: 300px; }
+.decor-Leaves  { top: 200px; left: 150px; }
+.decor-Earth   { top: 50px; left: 600px; }
 
-  /* Container for decorative images */
-  .decor-images {
-    position: relative;
-    width: 100%;
-    height: 0; /* optional, or set a fixed height if needed */
-  }
+.decor-img:hover {
+  transform: scale(1.1) translateX(2px) translateY(-2px) rotate(-1deg);
+  filter: brightness(1) drop-shadow(0 6px 15px rgba(0,0,0,0.3));
+  animation: buzzHover 0.2s infinite alternate;
+}
 
-  .decor-img {
-    position: absolute;
-    width: 140px;
-    height: 140px;
-    opacity: 1;
-    z-index: 0;
-    pointer-events: none;
-    filter: brightness(0.7) drop-shadow(0 4px 10px rgba(0,0,0,0.2));
-    transition: transform 0.3s ease, filter 0.3s ease;
-  }
-
-  .decor-img:hover {
-    transform: scale(1.1) translateX(2px) translateY(-2px) rotate(-1deg);
-    filter: brightness(1) drop-shadow(0 6px 15px rgba(0,0,0,0.3));
-    animation: buzzHover 0.2s infinite alternate;
-  }
-
-  @keyframes buzzHover {
-    0% { transform: scale(1.1) translateX(0) translateY(0) rotate(0deg); }
-    25% { transform: scale(1.1) translateX(1px) translateY(-1px) rotate(1deg); }
-    50% { transform: scale(1.1) translateX(-1px) translateY(1px) rotate(-1deg); }
-    75% { transform: scale(1.1) translateX(1px) translateY(1px) rotate(0.5deg); }
-    100% { transform: scale(1.1) translateX(-1px) translateY(-1px) rotate(-0.5deg); }
-  }
+@keyframes buzzHover {
+  0%   { transform: scale(1.1) translateX(0) translateY(0) rotate(0deg); }
+  25%  { transform: scale(1.1) translateX(1px) translateY(-1px) rotate(1deg); }
+  50%  { transform: scale(1.1) translateX(-1px) translateY(1px) rotate(-1deg); }
+  75%  { transform: scale(1.1) translateX(1px) translateY(1px) rotate(0.5deg); }
+  100% { transform: scale(1.1) translateX(-1px) translateY(-1px) rotate(-0.5deg); }
+}
 
     /* ========= Page styling (high-contrast / modern) ========= */
     body {
