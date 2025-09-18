@@ -12,41 +12,35 @@
     /* ===== Reset ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* ========= Decorative background images (must match HTML classes) ========= */
-    .decor-images {
-      position: fixed;
-      inset: 0;
-      pointer-events: none; /* don't block clicks */
-      z-index: -1;          /* always behind content */
-      overflow: hidden;
-    }
+    /* Decorative floating images */
+.decor-img {
+  position: absolute;
+  width: 140px;
+  opacity: 0.5;
+  z-index: 0;
+  animation: buzzFloat 6s ease-in-out infinite alternate;
+  pointer-events: none; /* Don’t block clicks */
+  transition: filter 0.3s ease, transform 0.3s ease;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
+}
 
-    .decor-img {
-      position: absolute;
-      width: 140px;
-      opacity: 0.12;
-      user-select: none;
-      filter: blur(0.2px);
-      animation: floatRotate 28s linear infinite, fadePulse 12s ease-in-out infinite;
-      will-change: transform, opacity;
-      pointer-events: none;
-    }
+.decor-img:hover {
+  filter: drop-shadow(0 6px 15px rgba(0, 0, 0, 0.2)) brightness(1.1);
+  transform: scale(1.05);
+}
 
-    /* positions (adjust sizes/positions if you want) */
-    .decor-cloud  { top: 6%; left: 4%;  width: 180px;  }
-    .decor-sun    { top: 8%; right: 6%;  width: 140px;  animation-delay: 3s; }
-    .decor-leaves { bottom: 12%; left: 6%; width: 130px;  animation-delay: 6s; }
-    .decor-earth  { bottom: 6%; right: 6%; width: 200px;  animation-delay: 9s; opacity: 0.08; }
+/* Gentle buzzing floating effect */
+@keyframes buzzFloat {
+  0%   { transform: translateY(0) translateX(0) scale(1); }
+  50%  { transform: translateY(-8px) translateX(4px) scale(1.02); }
+  100% { transform: translateY(4px) translateX(-4px) scale(1); }
+}
 
-    @keyframes floatRotate {
-      0%   { transform: rotate(0deg) translateY(0); }
-      50%  { transform: rotate(180deg) translateY(-12px); }
-      100% { transform: rotate(360deg) translateY(0); }
-    }
-    @keyframes fadePulse {
-      0%,100% { opacity: 0.08; }
-      50%     { opacity: 0.22; }
-    }
+  /* Specific positions for each image */
+  .decor-cloud { top: 10%; left: 5%; }
+  .decor-airflow { bottom: 10%; left: 15%; }
+  .decor-leaves { bottom: 15%; right: 10%; }
+  .decor-earth { top: 20%; right: 15%; }
 
     /* ========= Page styling (high-contrast / modern) ========= */
     body {
@@ -204,10 +198,10 @@
 
   <!-- Decorative images: placed before content so they sit behind everything -->
 <div class="decor-images">
-  <img src="images/Skyline.jpg" class="decor-img decor-cloud" alt="Skyline background">
-  <img src="images/Airflow.jpg" class="decor-img decor-sun" alt="Air flow visual">
-  <img src="images/Leaves.jpg" class="decor-img decor-leaves" alt="Leaves illustration">
-  <img src="images/Earth.jpg" class="decor-img decor-earth" alt="Earth illustration">
+  <img src="images/skyline.jpg" class="decor-img decor-cloud" alt="Skyline background">
+  <img src="images/air-flow.jpg" class="decor-img decor-airflow" alt="Air flow visual">
+  <img src="images/leaves.jpg" class="decor-img decor-leaves" alt="Leaves illustration">
+  <img src="images/earth.jpg" class="decor-img decor-earth" alt="Earth illustration">
 </div>
 
   <header>
