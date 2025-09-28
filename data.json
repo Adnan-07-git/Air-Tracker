@@ -1,31 +1,216 @@
 {
-  "Agartala": { "aqi": 0, "precautions": [] },
-  "Agra": { "aqi": 0, "precautions": [] },
-  "Aizawl": { "aqi": 0, "precautions": [] },
-  "Bengaluru": { "aqi": 0, "precautions": [] },
-  "Bhopal": { "aqi": 0, "precautions": [] },
-  "Bhubaneswar": { "aqi": 0, "precautions": [] },
-  "Chandigarh": { "aqi": 0, "precautions": [] },
-  "Chennai": { "aqi": 0, "precautions": [] },
-  "Dehradun": { "aqi": 0, "precautions": [] },
-  "Dispur": { "aqi": 0, "precautions": [] },
-  "Gangtok": { "aqi": 0, "precautions": [] },
-  "Gandhinagar": { "aqi": 0, "precautions": [] },
-  "Shimla": { "aqi": 0, "precautions": [] },
-  "Itanagar": { "aqi": 0, "precautions": [] },
-  "Jaipur": { "aqi": 0, "precautions": [] },
-  "Jammu": { "aqi": 0, "precautions": [] },
-  "Kohima": { "aqi": 0, "precautions": [] },
-  "Lucknow": { "aqi": 0, "precautions": [] },
-  "Mumbai": { "aqi": 0, "precautions": [] },
-  "Panaji": { "aqi": 0, "precautions": [] },
-  "Patna": { "aqi": 0, "precautions": [] },
-  "Raipur": { "aqi": 0, "precautions": [] },
-  "Ranchi": { "aqi": 0, "precautions": [] },
-  "Shillong": { "aqi": 0, "precautions": [] },
-  "Srinagar": { "aqi": 0, "precautions": [] },
-  "Thiruvananthapuram": { "aqi": 0, "precautions": [] },
-  "Tirupati": { "aqi": 0, "precautions": [] },
-  "Kolkata": { "aqi": 0, "precautions": [] },
-  "Bangalore": { "aqi": 0, "precautions": [] }
+  "Agartala": {
+    "aqi": 60,
+    "precautions": [
+      "Prefer early morning walks when air quality is better.",
+      "Avoid busy roads while commuting.",
+      "Encourage carpooling or public transport."
+    ]
+  },
+  "Agra": {
+    "aqi": 110,
+    "precautions": [
+      "Avoid prolonged outdoor activities near traffic zones.",
+      "Wear anti-pollution masks if commuting daily.",
+      "Keep windows closed during peak traffic hours."
+    ]
+  },
+  "Aizawl": {
+    "aqi": 45,
+    "precautions": [
+      "Air quality is generally good, enjoy outdoor activities.",
+      "Sensitive groups should monitor any respiratory symptoms."
+    ]
+  },
+  "Bengaluru": {
+    "aqi": 115,
+    "precautions": [
+      "Avoid prolonged outdoor activities near traffic zones.",
+      "Wear anti-pollution masks if commuting daily.",
+      "Use indoor plants to help filter air."
+    ]
+  },
+  "Bhopal": {
+    "aqi": 90,
+    "precautions": [
+      "Limit outdoor exposure if sensitive.",
+      "Use masks if pollution worsens.",
+      "Keep windows closed during peak traffic hours."
+    ]
+  },
+  "Bhubaneswar": {
+    "aqi": 80,
+    "precautions": [
+      "Avoid heavy outdoor exertion near traffic.",
+      "Use masks if sensitive to pollution.",
+      "Stay hydrated."
+    ]
+  },
+  "Chandigarh": {
+    "aqi": 70,
+    "precautions": [
+      "Prefer early morning walks when air quality is better.",
+      "Sensitive groups should limit outdoor exertion.",
+      "Keep indoor air clean with purifiers if necessary."
+    ]
+  },
+  "Chennai": {
+    "aqi": 95,
+    "precautions": [
+      "Avoid outdoor jogging near traffic-heavy areas.",
+      "Use a face mask if sensitive to pollution.",
+      "Drink warm fluids to soothe the respiratory system."
+    ]
+  },
+  "Dehradun": {
+    "aqi": 55,
+    "precautions": [
+      "Air quality is moderate; limit prolonged outdoor exertion.",
+      "Sensitive groups should consider masks.",
+      "Monitor local air alerts."
+    ]
+  },
+  "Dispur": {
+    "aqi": 75,
+    "precautions": [
+      "Avoid long outdoor activities near busy roads.",
+      "Use masks if sensitive to pollution.",
+      "Stay hydrated."
+    ]
+  },
+  "Gangtok": {
+    "aqi": 40,
+    "precautions": [
+      "Air quality is good; safe for outdoor activities.",
+      "Sensitive groups should monitor symptoms."
+    ]
+  },
+  "Gandhinagar": {
+    "aqi": 85,
+    "precautions": [
+      "Limit outdoor exposure if sensitive.",
+      "Wear masks near traffic-heavy zones.",
+      "Use indoor air purifiers if possible."
+    ]
+  },
+  "Hyderabad": {
+    "aqi": 95,
+    "precautions": [
+      "Avoid outdoor jogging near traffic-heavy areas.",
+      "Use a face mask if sensitive to pollution.",
+      "Drink warm fluids to soothe the respiratory system."
+    ]
+  },
+  "Itanagar": {
+    "aqi": 50,
+    "precautions": [
+      "Air quality is good; enjoy outdoor activities.",
+      "Sensitive groups should monitor symptoms."
+    ]
+  },
+  "Jaipur": {
+    "aqi": 105,
+    "precautions": [
+      "Avoid prolonged outdoor activities near traffic zones.",
+      "Wear masks if commuting daily.",
+      "Use indoor plants to help filter air."
+    ]
+  },
+  "Jammu": {
+    "aqi": 65,
+    "precautions": [
+      "Prefer early morning walks when air quality is better.",
+      "Avoid busy roads while commuting.",
+      "Encourage carpooling or public transport."
+    ]
+  },
+  "Kohima": {
+    "aqi": 45,
+    "precautions": [
+      "Air quality is generally good; safe for outdoor activities.",
+      "Sensitive groups should monitor any respiratory symptoms."
+    ]
+  },
+  "Kolkata": {
+    "aqi": 120,
+    "precautions": [
+      "Limit outdoor exposure.",
+      "Wear an N95 mask outside.",
+      "Use indoor air purifiers."
+    ]
+  },
+  "Lucknow": {
+    "aqi": 100,
+    "precautions": [
+      "Sensitive groups should limit outdoor exertion.",
+      "Use masks near busy roads.",
+      "Keep windows closed during peak traffic hours."
+    ]
+  },
+  "Mumbai": {
+    "aqi": 60,
+    "precautions": [
+      "Prefer early morning walks when air quality is better.",
+      "Avoid busy roads while commuting.",
+      "Encourage carpooling or public transport."
+    ]
+  },
+  "Panaji": {
+    "aqi": 55,
+    "precautions": [
+      "Air quality is moderate; limit prolonged outdoor exertion.",
+      "Sensitive groups should consider masks."
+    ]
+  },
+  "Patna": {
+    "aqi": 130,
+    "precautions": [
+      "Children, elderly, and asthma patients should wear masks outdoors.",
+      "Avoid jogging near traffic-heavy areas."
+    ]
+  },
+  "Raipur": {
+    "aqi": 90,
+    "precautions": [
+      "Limit outdoor exposure if sensitive.",
+      "Use masks if pollution worsens.",
+      "Keep windows closed during peak traffic hours."
+    ]
+  },
+  "Ranchi": {
+    "aqi": 70,
+    "precautions": [
+      "Prefer early morning walks when air quality is better.",
+      "Sensitive groups should limit outdoor exertion."
+    ]
+  },
+  "Shillong": {
+    "aqi": 40,
+    "precautions": [
+      "Air quality is good; safe for outdoor activities.",
+      "Sensitive groups should monitor symptoms."
+    ]
+  },
+  "Shimla": {
+    "aqi": 50,
+    "precautions": [
+      "Air quality is good; enjoy outdoor activities.",
+      "Sensitive groups should monitor symptoms."
+    ]
+  },
+  "Srinagar": {
+    "aqi": 55,
+    "precautions": [
+      "Air quality is moderate; limit prolonged outdoor exertion.",
+      "Sensitive groups should consider masks."
+    ]
+  },
+  "Thiruvananthapuram": {
+    "aqi": 60,
+    "precautions": [
+      "Prefer early morning walks when air quality is better.",
+      "Avoid busy roads while commuting.",
+      "Encourage carpooling or public transport."
+    ]
+  }
 }
