@@ -83,7 +83,7 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.04);
     }
     .input-group { display:flex; gap:1rem; max-width:640px; margin:0 auto; align-items:center; }
-    .search-box input[type="text"] {
+    .search-box select {
       flex:1;
       padding: 0.9rem 1rem;
       border-radius: 10px;
@@ -93,7 +93,6 @@
       color: #0f172a;
       outline: none;
     }
-    .search-box input[type="text"]::placeholder { color: #94a3b8; }
     .search-box button {
       padding: 0.9rem 1.25rem;
       border-radius: 10px;
@@ -159,7 +158,7 @@
     @media (max-width: 768px) {
       header h1 { font-size: 2rem; }
       .input-group { flex-direction: column; gap:0.75rem; }
-      .search-box input[type="text"] { width: 100%; }
+      .search-box select { width: 100%; }
       .search-box button { width: 100%; margin-left: 0; }
     }
   </style>
@@ -177,7 +176,37 @@
 
       <div class="search-box">
         <div class="input-group">
-          <input type="text" id="location-input" placeholder="Enter city (e.g., Delhi, Mumbai, Bangalore)" />
+          <select id="location-input">
+            <option value="">Select a city</option>
+            <option value="Agartala">Agartala</option>
+            <option value="Agra">Agra</option>
+            <option value="Aizawl">Aizawl</option>
+            <option value="Bengaluru">Bengaluru</option>
+            <option value="Bhopal">Bhopal</option>
+            <option value="Bhubaneswar">Bhubaneswar</option>
+            <option value="Chandigarh">Chandigarh</option>
+            <option value="Chennai">Chennai</option>
+            <option value="Dehradun">Dehradun</option>
+            <option value="Dispur">Dispur</option>
+            <option value="Gangtok">Gangtok</option>
+            <option value="Gandhinagar">Gandhinagar</option>
+            <option value="Shimla">Shimla</option>
+            <option value="Itanagar">Itanagar</option>
+            <option value="Jaipur">Jaipur</option>
+            <option value="Jammu">Jammu</option>
+            <option value="Kohima">Kohima</option>
+            <option value="Lucknow">Lucknow</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Panaji">Panaji</option>
+            <option value="Patna">Patna</option>
+            <option value="Raipur">Raipur</option>
+            <option value="Ranchi">Ranchi</option>
+            <option value="Shillong">Shillong</option>
+            <option value="Srinagar">Srinagar</option>
+            <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+            <option value="Tirupati">Tirupati</option>
+            <option value="Kolkata">Kolkata</option>
+          </select>
           <button onclick="showPrecautions()">Search</button>
         </div>
       </div>
@@ -225,161 +254,159 @@
     <p>&copy; 2025 CleanAir Tracker. All rights reserved.</p>
   </footer>
 
+  <!-- Updated Script with live AQI & tips -->
   <script>
-  // Fetch live AQI from OpenAQ API
-  async function showPrecautions() {
-    const location = document.getElementById("location-input").value.trim();
-    const outputDiv = document.getElementById("precautions-output");
+    async function showPrecautions() {
+      const location = document.getElementById("location-input").value;
+      const outputDiv = document.getElementById("precautions-output");
 
-    if (!location) {
-      outputDiv.innerHTML = "<strong>Please enter a city name.</strong>";
-      outputDiv.style.display = "block";
-      return;
-    }
-
-    try {
-      // OpenAQ API - PM2.5 measurement
-      const response = await fetch(
-        `https://api.openaq.org/v2/latest?city=${encodeURIComponent(location)}&limit=1`
-      );
-      const data = await response.json();
-
-      if (!data.results || data.results.length === 0) {
-        outputDiv.innerHTML = `<h3>No live AQI data found for "${location}".</h3>`;
+      if (!location) {
+        outputDiv.innerHTML = "<strong>Please select a city.</strong>";
         outputDiv.style.display = "block";
         return;
       }
 
-      const cityData = data.results[0];
-      const measurement = cityData.measurements.find(m => m.parameter === "pm25") || cityData.measurements[0];
-      const aqi = measurement.value;
+      try {
+        // Fetch live AQI from OpenAQ
+        const response = await fetch(
+          `https://api.openaq.org/v2/latest?city=${encodeURIComponent(location)}&limit=1`
+        );
+        const data = await response.json();
 
-      let aqiLevel = "";
-      let aqiColor = "";
+        if (!data.results || data.results.length === 0) {
+          outputDiv.innerHTML = `<h3>No live AQI data found for "${location}".</h3>`;
+          outputDiv.style.display = "block";
+          return;
+        }
 
-      if (aqi <= 50) {
-        aqiLevel = "Good"; aqiColor = "green";
-      } else if (aqi <= 100) {
-        aqiLevel = "Moderate"; aqiColor = "#f59e0b";
-      } else if (aqi <= 150) {
-        aqiLevel = "Unhealthy for Sensitive Groups"; aqiColor = "orange";
-      } else if (aqi <= 200) {
-        aqiLevel = "Unhealthy"; aqiColor = "red";
-      } else if (aqi <= 300) {
-        aqiLevel = "Very Unhealthy"; aqiColor = "purple";
-      } else {
-        aqiLevel = "Hazardous"; aqiColor = "maroon";
+        const cityData = data.results[0];
+        const measurement = cityData.measurements.find(m => m.parameter === "pm25") || cityData.measurements[0];
+        const aqi = measurement.value;
+
+        let aqiLevel = "";
+        let aqiColor = "";
+
+        if (aqi <= 50) {
+          aqiLevel = "Good"; aqiColor = "green";
+        } else if (aqi <= 100) {
+          aqiLevel = "Moderate"; aqiColor = "#f59e0b";
+        } else if (aqi <= 150) {
+          aqiLevel = "Unhealthy for Sensitive Groups"; aqiColor = "orange";
+        } else if (aqi <= 200) {
+          aqiLevel = "Unhealthy"; aqiColor = "red";
+        } else if (aqi <= 300) {
+          aqiLevel = "Very Unhealthy"; aqiColor = "purple";
+        } else {
+          aqiLevel = "Hazardous"; aqiColor = "maroon";
+        }
+
+        // Dynamic precautions based on AQI
+        let precautions = [];
+        if (aqi <= 50) {
+          precautions = ["Enjoy outdoor activities freely."];
+        } else if (aqi <= 100) {
+          precautions = ["Sensitive groups should limit long outdoor exertion."];
+        } else if (aqi <= 150) {
+          precautions = [
+            "Children, elderly, and asthma patients should wear masks outdoors.",
+            "Avoid jogging near traffic-heavy areas."
+          ];
+        } else if (aqi <= 200) {
+          precautions = [
+            "Limit outdoor exposure.",
+            "Wear an N95 mask outside.",
+            "Use indoor air purifiers."
+          ];
+        } else if (aqi <= 300) {
+          precautions = [
+            "Stay indoors as much as possible.",
+            "Keep windows closed.",
+            "Avoid physical activity outdoors."
+          ];
+        } else {
+          precautions = [
+            "Emergency situation: Avoid going outside.",
+            "Sensitive groups should relocate if possible."
+          ];
+        }
+
+        outputDiv.innerHTML = `
+          <h3>Live AQI for ${cityData.city}:</h3>
+          <p><strong>AQI:</strong> <span style="color:${aqiColor}; font-weight:bold;">
+            ${aqi} (${aqiLevel})
+          </span></p>
+          <ul>${precautions.map(p => `<li>${p}</li>`).join("")}</ul>
+        `;
+
+      } catch (error) {
+        console.error(error);
+        outputDiv.innerHTML = `<h3>⚠️ Error fetching live data. Try again later.</h3>`;
       }
 
-      // Dynamic precautions based on AQI
-      let precautions = [];
-      if (aqi <= 50) {
-        precautions = ["Enjoy outdoor activities freely."];
-      } else if (aqi <= 100) {
-        precautions = ["Sensitive groups should limit long outdoor exertion."];
-      } else if (aqi <= 150) {
-        precautions = [
-          "Children, elderly, and asthma patients should wear masks outdoors.",
-          "Avoid jogging near traffic-heavy areas."
-        ];
-      } else if (aqi <= 200) {
-        precautions = [
-          "Limit outdoor exposure.",
-          "Wear an N95 mask outside.",
-          "Use indoor air purifiers."
-        ];
-      } else if (aqi <= 300) {
-        precautions = [
-          "Stay indoors as much as possible.",
-          "Keep windows closed.",
-          "Avoid physical activity outdoors."
-        ];
-      } else {
-        precautions = [
-          "Emergency situation: Avoid going outside.",
-          "Sensitive groups should relocate if possible."
-        ];
-      }
-
-      outputDiv.innerHTML = `
-        <h3>Live AQI for ${cityData.city}:</h3>
-        <p><strong>AQI:</strong> <span style="color:${aqiColor}; font-weight:bold;">
-          ${aqi} (${aqiLevel})
-        </span></p>
-        <ul>${precautions.map(p => `<li>${p}</li>`).join("")}</ul>
-      `;
-
-    } catch (error) {
-      console.error(error);
-      outputDiv.innerHTML = `<h3>⚠️ Error fetching live data. Try again later.</h3>`;
+      outputDiv.style.display = "block";
     }
 
-    outputDiv.style.display = "block";
-  }
+    // Random tips
+    const tips = [
+      "Indoor plants like peace lilies, spider plants, and snake plants can help improve air quality by absorbing pollutants.",
+      "Switching to public transport can cut your personal carbon footprint by up to 30%.",
+      "Keeping windows closed during high pollution days helps reduce indoor exposure.",
+      "Staying hydrated helps your body flush out pollution-related toxins.",
+      "Air purifiers with HEPA filters can reduce indoor pollutants like dust, pollen, and smoke.",
+      "Carpooling with friends or colleagues reduces both traffic congestion and air pollution.",
+      "Burning candles and incense indoors can significantly worsen indoor air quality.",
+      "Using an exhaust fan while cooking helps remove harmful gases like nitrogen dioxide.",
+      "Electric vehicles produce zero tailpipe emissions, improving urban air quality.",
+      "Household dust can carry pollutants—regular vacuuming with a HEPA filter helps reduce it.",
+      "Children and the elderly are more vulnerable to poor air quality—extra precautions are important.",
+      "Reducing meat consumption can lower methane and greenhouse gas emissions linked to livestock farming.",
+      "Pollution levels are usually lower after heavy rainfall, as rain washes particulates from the air.",
+      "Smog tends to be worst on sunny, hot days when pollutants react with sunlight.",
+      "Switching to energy-efficient appliances reduces emissions from power plants.",
+      "Volatile Organic Compounds (VOCs) from paints and cleaners contribute to indoor air pollution.",
+      "Second-hand smoke releases hundreds of toxic chemicals into the air, even indoors.",
+      "Short trips pollute the most—walking or cycling for local errands makes a big difference.",
+      "Idling your car engine for more than 10 seconds wastes fuel and adds unnecessary pollution.",
+      "Air quality often improves significantly in early mornings and late nights due to lower traffic.",
+      "Trees not only provide oxygen but also trap dust and absorb harmful gases.",
+      "Avoid using diesel generators whenever possible—they release large amounts of particulate matter.",
+      "Switching to renewable energy sources like solar and wind improves both climate and air quality.",
+      "Poor ventilation indoors can trap pollutants—open windows on low-pollution days.",
+      "Air quality inside vehicles can sometimes be worse than outside due to trapped emissions.",
+      "Wood-burning stoves release fine particulate matter, which can be harmful to lungs.",
+      "High-efficiency furnace and AC filters help trap indoor air pollutants.",
+      "Walking on quieter side streets can reduce your pollution exposure by up to 60%.",
+      "Fine particles (PM2.5) are so small they can enter the bloodstream through your lungs."
+    ];
 
-  // Random air quality tips (keep existing logic)
-  const tips = [
-    "Indoor plants like peace lilies, spider plants, and snake plants can help improve air quality by absorbing pollutants.",
-    "Switching to public transport can cut your personal carbon footprint by up to 30%.",
-    "Keeping windows closed during high pollution days helps reduce indoor exposure.",
-    "Staying hydrated helps your body flush out pollution-related toxins.",
-    "Air purifiers with HEPA filters can reduce indoor pollutants like dust, pollen, and smoke.",
-    "Carpooling with friends or colleagues reduces both traffic congestion and air pollution.",
-    "Burning candles and incense indoors can significantly worsen indoor air quality.",
-    "Using an exhaust fan while cooking helps remove harmful gases like nitrogen dioxide.",
-    "Electric vehicles produce zero tailpipe emissions, improving urban air quality.",
-    "Household dust can carry pollutants—regular vacuuming with a HEPA filter helps reduce it.",
-    "Children and the elderly are more vulnerable to poor air quality—extra precautions are important.",
-    "Reducing meat consumption can lower methane and greenhouse gas emissions linked to livestock farming.",
-    "Pollution levels are usually lower after heavy rainfall, as rain washes particulates from the air.",
-    "Smog tends to be worst on sunny, hot days when pollutants react with sunlight.",
-    "Switching to energy-efficient appliances reduces emissions from power plants.",
-    "Volatile Organic Compounds (VOCs) from paints and cleaners contribute to indoor air pollution.",
-    "Second-hand smoke releases hundreds of toxic chemicals into the air, even indoors.",
-    "Short trips pollute the most—walking or cycling for local errands makes a big difference.",
-    "Idling your car engine for more than 10 seconds wastes fuel and adds unnecessary pollution.",
-    "Air quality often improves significantly in early mornings and late nights due to lower traffic.",
-    "Trees not only provide oxygen but also trap dust and absorb harmful gases.",
-    "Avoid using diesel generators whenever possible—they release large amounts of particulate matter.",
-    "Switching to renewable energy sources like solar and wind improves both climate and air quality.",
-    "Poor ventilation indoors can trap pollutants—open windows on low-pollution days.",
-    "Air quality inside vehicles can sometimes be worse than outside due to trapped emissions.",
-    "Wood-burning stoves release fine particulate matter, which can be harmful to lungs.",
-    "High-efficiency furnace and AC filters help trap indoor air pollutants.",
-    "Walking on quieter side streets can reduce your pollution exposure by up to 60%.",
-    "Fine particles (PM2.5) are so small they can enter the bloodstream through your lungs."
-  ];
+    let usedTips = [];
+    let currentTip = "";
 
-  let usedTips = [];
-  let currentTip = "";
+    function getRandomTip() {
+      if (usedTips.length === tips.length) usedTips = [];
+      let newTip;
+      do {
+        newTip = tips[Math.floor(Math.random() * tips.length)];
+      } while (newTip === currentTip || usedTips.includes(newTip));
+      usedTips.push(newTip);
+      currentTip = newTip;
+      return newTip;
+    }
 
-  function getRandomTip() {
-    if (usedTips.length === tips.length) usedTips = [];
-    let newTip;
-    do {
-      newTip = tips[Math.floor(Math.random() * tips.length)];
-    } while (newTip === currentTip || usedTips.includes(newTip));
-    usedTips.push(newTip);
-    currentTip = newTip;
-    return newTip;
-  }
+    function showNextTip() {
+      const tipBox = document.getElementById("tip-box");
+      if (!tipBox) return;
+      tipBox.style.opacity = 0;
+      setTimeout(() => {
+        tipBox.textContent = getRandomTip();
+        tipBox.style.opacity = 1;
+      }, 300);
+    }
 
-  function showNextTip() {
-    const tipBox = document.getElementById("tip-box");
-    if (!tipBox) return;
-    tipBox.style.opacity = 0;
-    setTimeout(() => {
-      tipBox.textContent = getRandomTip();
-      tipBox.style.opacity = 1;
-    }, 300);
-  }
-
-  window.addEventListener("DOMContentLoaded", () => {
-    showNextTip();
-    setInterval(showNextTip, 10000);
-  });
-</script>
-
-
+    window.addEventListener("DOMContentLoaded", () => {
+      showNextTip();
+      setInterval(showNextTip, 10000);
+    });
+  </script>
 </body>
 </html>
