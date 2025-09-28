@@ -1,45 +1,31 @@
 {
-  "Delhi": {
-    "aqi": 180,
-    "precautions": [
-      "Limit outdoor exposure during peak pollution hours.",
-      "Wear an N95 mask when outside.",
-      "Use indoor air purifiers.",
-      "Stay hydrated and avoid intense outdoor workouts."
-    ]
-  },
-  "Hyderabad": {
-    "aqi": 95,
-    "precautions": [
-      "Avoid outdoor jogging near traffic-heavy areas.",
-      "Use a face mask if sensitive to pollution.",
-      "Drink warm fluids to soothe the respiratory system."
-    ]
-  },
-  "Mumbai": {
-    "aqi": 60,
-    "precautions": [
-      "Prefer early morning walks when air quality is better.",
-      "Avoid busy roads while commuting.",
-      "Encourage carpooling or public transport."
-    ]
-  },
-  "Bangalore": {
-    "aqi": 110,
-    "precautions": [
-      "Avoid prolonged outdoor activities near traffic zones.",
-      "Wear anti-pollution masks if commuting daily.",
-      "Use indoor plants to help filter air.",
-      "Keep windows closed during peak traffic hours."
-    ]
-  },
-  "New York": {
-    "aqi": 70,
-    "precautions": [
-      "Check daily air quality reports before outdoor activities.",
-      "Exercise in parks and open areas away from heavy traffic.",
-      "Limit the use of wood-burning stoves during poor air quality days.",
-      "Sensitive groups (asthma, elderly) should reduce exposure outdoors."
-    ]
-  }
+  "Agartala": { "aqi": 0, "precautions": [] },
+  "Agra": { "aqi": 0, "precautions": [] },
+  "Aizawl": { "aqi": 0, "precautions": [] },
+  "Bengaluru": { "aqi": 0, "precautions": [] },
+  "Bhopal": { "aqi": 0, "precautions": [] },
+  "Bhubaneswar": { "aqi": 0, "precautions": [] },
+  "Chandigarh": { "aqi": 0, "precautions": [] },
+  "Chennai": { "aqi": 0, "precautions": [] },
+  "Dehradun": { "aqi": 0, "precautions": [] },
+  "Dispur": { "aqi": 0, "precautions": [] },
+  "Gangtok": { "aqi": 0, "precautions": [] },
+  "Gandhinagar": { "aqi": 0, "precautions": [] },
+  "Shimla": { "aqi": 0, "precautions": [] },
+  "Itanagar": { "aqi": 0, "precautions": [] },
+  "Jaipur": { "aqi": 0, "precautions": [] },
+  "Jammu": { "aqi": 0, "precautions": [] },
+  "Kohima": { "aqi": 0, "precautions": [] },
+  "Lucknow": { "aqi": 0, "precautions": [] },
+  "Mumbai": { "aqi": 0, "precautions": [] },
+  "Panaji": { "aqi": 0, "precautions": [] },
+  "Patna": { "aqi": 0, "precautions": [] },
+  "Raipur": { "aqi": 0, "precautions": [] },
+  "Ranchi": { "aqi": 0, "precautions": [] },
+  "Shillong": { "aqi": 0, "precautions": [] },
+  "Srinagar": { "aqi": 0, "precautions": [] },
+  "Thiruvananthapuram": { "aqi": 0, "precautions": [] },
+  "Tirupati": { "aqi": 0, "precautions": [] },
+  "Kolkata": { "aqi": 0, "precautions": [] },
+  "Bangalore": { "aqi": 0, "precautions": [] }
 }
