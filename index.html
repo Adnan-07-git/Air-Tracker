@@ -301,10 +301,12 @@
 
     try {
       // Live fetch
-      const resp = await fetch(`https://api.openaq.org/v2/latest?city=${encodeURIComponent(location)}&limit=1`);
+      // Instead of calling the external API directly:
+      const resp = await fetch(`/api/aqi?city=${encodeURIComponent(location)}`);
       const data = await resp.json();
-      let cityData = data.results && data.results[0];
-      let aqi = 0;
+
+      // WAQI gives AQI at data.data.aqi
+      let aqi = data.data.aqi || 0;
 
       if(cityData && cityData.measurements && cityData.measurements.length>0){
         const measurement = cityData.measurements.find(m=>m.parameter==="pm25") || cityData.measurements[0];
